@@ -29,9 +29,7 @@ $total-width: 52rem+$section-padding*2;
 //      doesnt really make sense but you can see it works 
 //      by checking the margin
 $media-big: $total-width+2rem; // $total-width + 2rem;
-
-// Font size. I think its right.
-$def-font-size: 1rem;
+$media-small: 400px;
 
 // ### Standardization rules ###
 *,
@@ -100,11 +98,10 @@ a:focus {
 }
 
 html {
+    font-size: 16px;
 
-    font-size: 14px;
-
-    @media only screen and (min-width: $media-big) {
-        font-size: 16px;
+    @media only screen and (max-width: $media-big * 0.5) {
+        font-size: 14px;
     }
 }
 
@@ -195,6 +192,21 @@ body {
     }
 }
 
+.container--timeline-ev {
+    @extend %container;
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+        "title date";
+
+    @media only screen and (min-width: $media-big) {
+        grid-template-columns: 1fr 0.25em 1fr;
+        grid-template-areas:
+            "a1 a2 a3";
+    }
+}
+
 .container--timeline-end {
     @extend %container;
 
@@ -214,13 +226,14 @@ body {
     align-items: center;
     justify-content: center;
     gap: 2em;
+    margin: 2em 0;
 
     grid-template-areas:
         "box1"
         "box2";
 
     @media only screen and (min-width: $media-big) {
-        column-gap: 4.5em;
+        column-gap: 2em;
     }
 }
 
@@ -395,10 +408,9 @@ body {
     height: 100%;   
     text-align: left;
    
-
     padding: 1em 5em 1.2em 2em;
     border-radius: 4px;
-    background-color: var(--bg-1);
+    background-color: var(--bg-1); // For all kind of cards
 
     cursor: pointer;
 
@@ -428,17 +440,25 @@ body {
     }
 }
 
-
-
 // ### Layout stuff ### 
 #page-wrapper {
     // Drags the footer down
     min-height: calc(100vh - #{$footer-height});
+    padding: 0 2em;
+    @media only screen and (max-width: $media-small) {
+        padding: 0;
+    }
 }
+
+body {
+    background-color: var(--bg-0);
+}
+
 
 // ### Sections ###
 .section {
-    background-color: var(--bg-1);
+    //background-color: var(--bg-1);
+    box-sizing: border-box;
 }
 
 .section--page-title {
@@ -446,10 +466,26 @@ body {
     text-align: center;
 }
 
-.section-content {
+.section-divider {
+    height: 2px;
+    margin: 3em auto;
+    background: linear-gradient(90deg, var(--bg-1) 10%, var(--ui-1) 50%,var(--bg-1) 90%);
+    background: var(--bg-0);
+    width: 75%;
+  }
+
+.article, .centered-content {
     max-width: $total-width;
     padding: $section-padding;
     margin: auto;
+
+}
+
+.article {
+    @include shadow-weak();
+    background-color: var(--bg-1);
+    border-radius: 10px;
+    margin: 1em auto;
 }
 
 .section__title {
@@ -477,16 +513,16 @@ body {
     position: sticky;
     top: 0;
     min-height: $nav-height;
-    background-color: var(--bg-0);
     transition: top 0.3s; // Transition on scroll
 
-    // TODO: Make shadow theme-based
-    box-shadow: 0px 4px 4px 0px var(--shadow-weak);
+   
 
-    .section-content {
+    .centered-content {
+         // TODO: Make shadow theme-based, and only on scroll
+        //box-shadow: 0px 4px 4px 0px var(--shadow-weak);
         // Override padding
         padding: $nav-padding $section-padding;
-
+        background-color: var(--bg-0); // !!!
         // Center vertically nav menu
         display: flex;
         align-items: center;
@@ -504,10 +540,13 @@ body {
 
 }
 
+.accent {
+    color: var(--accent);
+}
+
 // ### Hero ###
 #hero {
     // Substract the height of the nav from the hero
-    background-color: var(--bg-0);
     min-height: calc(100vh - #{$nav-height});
 
     .hero-container {
@@ -535,9 +574,6 @@ body {
             color: var(--ui-1);
         }
 
-        .red {
-            color: var(--accent);
-        }
     }
 
     .hero__arrow {
@@ -564,6 +600,8 @@ body {
     .subsection__subtitle {
         text-align: center;
     }
+
+    
 
     .whoami__info {
 
@@ -601,7 +639,7 @@ body {
         text-align: center;
 
         svg {
-            width: 100%;
+            width: 90%;
             max-width: 25em;
             margin: 1em;
 
@@ -645,10 +683,9 @@ body {
 // ### Footer ###
 #footer {
     min-height: $footer-height;
-    background-color: var(--bg-0);
 
     // Override padding
-    .section-content {
+    .centered-content {
         padding: $footer-padding $section-padding;
     }
 
@@ -678,10 +715,6 @@ body {
 // ### Timeline
 #timeline {
 
-    .section-content {
-        padding-top: 0;
-    }
-
     .timeline__bar {
         background-color: var(--ui-1);
     }
@@ -702,8 +735,13 @@ body {
         }
 
         .timeline__description {
-            margin-bottom: 3em;
+            margin-bottom: 1.5em;
         }
+        .timeline__date,
+        .timeline__title {
+            margin-top: 1.5em;
+        }
+
 
         .timeline__date .box--border {
             background-color: var(--ui-1);
@@ -712,6 +750,7 @@ body {
 
 
     }
+
 
     .container--timeline-end {
         .timeline__image {
@@ -751,6 +790,16 @@ body {
 
         .timeline__description {
             grid-area: desc;
+        }
+
+        .timeline__date {
+            grid-area: date;
+        }
+    }
+
+    .container--timeline-ev {
+        .timeline__title {
+            grid-area: title;
         }
 
         .timeline__date {
