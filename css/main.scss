@@ -14,6 +14,7 @@
 @import "themes.scss";
 
 
+
 // * All of this have to be in rems else 
 //    I should have to use calc to mix ems and rems
 $nav-padding: 0.5rem;
@@ -22,14 +23,16 @@ $nav-height: 2.5rem+$nav-padding*2;
 $footer-padding: 1rem;
 $footer-height: 7.5rem+$footer-padding*2;
 
-$section-padding: 2rem;
-$total-width: 52rem+$section-padding*2;
+$centered-padding: 3rem;
+$total-width: 50rem+$centered-padding*2;
 
 // * Fix weird text resizing issues by adding 2 extra rem
 //      doesnt really make sense but you can see it works 
 //      by checking the margin
-$media-big: $total-width+2rem; // $total-width + 2rem;
-$media-small: 400px;
+$media-big: $total-width+3rem;  // Layout change
+$media-mid: $media-big/2;       // Font resize
+$media-small: 400px;            // Padding removed
+$nav-toogle: 34rem;
 
 // ### Standardization rules ###
 *,
@@ -100,7 +103,7 @@ a:focus {
 html {
     font-size: 16px;
 
-    @media only screen and (max-width: $media-big * 0.5) {
+    @media only screen and (max-width: $media-mid) {
         font-size: 14px;
     }
 }
@@ -108,6 +111,10 @@ html {
 html,
 body {
     margin: 0;
+}
+
+body {
+    background-color: var(--bg-0);
 }
 
 // ### General properties ### 
@@ -123,15 +130,6 @@ body {
 ::-webkit-scrollbar-thumb {
     background: var(--ui-0);
 }
-
-/*
-// Border size goes weird when zooming 
-::-webkit-scrollbar-track
-{
-	border: 1px solid var(--light-fg-1);
-	background-color:var(--light-bg-1);
-}
-*/
 
 // ### General Containers ### 
 %container {
@@ -173,6 +171,7 @@ body {
 .container--flexrow--spaced {
     @extend .container--flexrow;
     justify-content: space-between;
+    align-items: center;
 }
 
 .container--timeline-fr {
@@ -285,7 +284,12 @@ body {
         width: 1em;
         height: 1em;
     }
+
+
+    
 }
+
+
 
 // ### Buttons ###
 %button {
@@ -293,6 +297,7 @@ body {
     text-align: center;
     text-decoration: none;
     background-color: transparent;
+
 
     &:hover {
         // opacity: 0.5;
@@ -307,7 +312,6 @@ body {
     @extend %button;
 
     $border-size: 0.1em;
-
     padding: 0.25em 0.4em;
     border-radius: 4px;
 
@@ -316,8 +320,6 @@ body {
 
     &:hover {
         border: $border-size solid var(--ui-1);
-
-        // opacity: 0.5;
     }
 
     &:active {
@@ -329,6 +331,8 @@ body {
         background-color: var(--ui-1);
     }
 }
+
+
 
 // ### Boxes ###
 %box {
@@ -393,7 +397,7 @@ body {
 
     &:hover {
         box-shadow: 0 6px 15px var(--shadow-strong),
-        0 4px 8px var(--shadow-strong);
+            0 4px 8px var(--shadow-strong);
     }
 }
 
@@ -405,19 +409,15 @@ body {
     font-size: 1rem;
     min-height: 10em;
     width: 100%;
-    height: 100%;   
+    height: 100%;
     text-align: left;
-   
-    padding: 1em 5em 1.2em 2em;
+
+    padding: 1em 2em 1.2em 2em;
     border-radius: 4px;
     background-color: var(--bg-1); // For all kind of cards
 
-    cursor: pointer;
+   
 
-    // Image palcement
-    background-repeat: no-repeat;
-    background-position: right;
-    background-size: 5em;
 
     /*
     // I dont think this is needed
@@ -428,11 +428,14 @@ body {
         max-height: 120px;
     }
     */
-    &:hover, &:focus, &:active {
+    &:hover,
+    &:focus,
+    &:active {
         outline: none;
         border: none;
         transform: scale(1.02);
     }
+
     h2,
     h3,
     p {
@@ -440,20 +443,50 @@ body {
     }
 }
 
+
+%cardbg {
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: 5em;
+    padding-right: 5.5em;
+}
+.cardbg--blank {
+    @extend %cardbg;
+    background-image: url('../static/blank.svg');
+
+
+}
+
+.cardbg--terminal {
+    @extend %cardbg;
+    background-image: url('../static/terminal.svg');
+
+
+}
+
+.cardbg--programming {
+    @extend %cardbg;
+    background-image: url('../static/programming.svg');
+}
+
+.cardbg--linux {
+    @extend %cardbg;
+    background-image: url('../static/linux.svg');
+}
+
 // ### Layout stuff ### 
-#page-wrapper {
+.page-wrapper {
     // Drags the footer down
-    min-height: calc(100vh - #{$footer-height});
-    padding: 0 2em;
+    min-height: calc(100vh - #{($footer-height + $nav-height)});
+  
+}
+.page-wrapper, #nav {
+    padding: 0 1em;
+
     @media only screen and (max-width: $media-small) {
         padding: 0;
     }
 }
-
-body {
-    background-color: var(--bg-0);
-}
-
 
 // ### Sections ###
 .section {
@@ -469,22 +502,22 @@ body {
 .section-divider {
     height: 2px;
     margin: 3em auto;
-    background: linear-gradient(90deg, var(--bg-1) 10%, var(--ui-1) 50%,var(--bg-1) 90%);
+    background: linear-gradient(90deg, var(--bg-1) 10%, var(--ui-1) 50%, var(--bg-1) 90%);
     background: var(--bg-0);
     width: 75%;
-  }
+}
 
-.article, .centered-content {
-    max-width: $total-width;
-    padding: $section-padding;
+.article,
+.centered-content {
+    padding-top: $centered-padding;
+    padding-bottom: $centered-padding;
     margin: auto;
-
 }
 
 .article {
-    @include shadow-weak();
+    @include shadow-strong();
     background-color: var(--bg-1);
-    border-radius: 10px;
+    border-radius: 5px;
     margin: 1em auto;
 }
 
@@ -503,26 +536,40 @@ body {
 .subsection__subtitle {
     color: var(--ui-1);
     margin: 1.125em auto;
-    max-width: 50%;
+    max-width: 70%;
 }
 
+// Shadow for the nav
+.shadow-strong {
+    @include shadow-strong();
+}
+
+.centered-content {
+    padding-left: $centered-padding;
+    padding-right: $centered-padding;
+    max-width: $total-width;
+
+    @media only screen and (max-width: $media-small) {
+        padding-left: $centered-padding/2;
+        padding-right: $centered-padding/2;
+    }
+    
+}
 // ### Nav Menu ### 
-#nav {
+.nav {
     z-index: 10; // Max z index
 
     position: sticky;
     top: 0;
     min-height: $nav-height;
     transition: top 0.3s; // Transition on scroll
-
-   
-
+    background-color: var(--bg-0); // !!!
+    
     .centered-content {
-         // TODO: Make shadow theme-based, and only on scroll
-        //box-shadow: 0px 4px 4px 0px var(--shadow-weak);
-        // Override padding
-        padding: $nav-padding $section-padding;
-        background-color: var(--bg-0); // !!!
+
+        padding-top: $nav-padding;
+        padding-bottom: $nav-padding;
+  
         // Center vertically nav menu
         display: flex;
         align-items: center;
@@ -538,16 +585,53 @@ body {
         margin: 0;
     }
 
+    svg {
+        fill: var(--ui-1);
+    }
+
+    .logo {
+
+        border: 0.1em solid transparent;
+        &:hover,
+        &:focus,
+        &:active {
+            border: 0.1em solid transparent;
+        }
+
+        svg {
+            width: 2.2em;
+            height: 2.2em;
+        }
+    }
+
+
 }
+
+.nav__toogle {
+    display: none;
+    @media only screen and (max-width: $nav-toogle) {
+        display: block;
+    }
+}
+
+.nav-hide {
+    @media only screen and (max-width: $nav-toogle) {
+            display: none;
+    }
+}
+
+
+
 
 .accent {
     color: var(--accent);
 }
 
 // ### Hero ###
-#hero {
+.hero {
     // Substract the height of the nav from the hero
-    min-height: calc(100vh - #{$nav-height});
+    //min-height: calc(100vh - #{$nav-height});
+    /*#{$footer-height}*/
 
     .hero-container {
         // Very unique one
@@ -593,7 +677,7 @@ body {
 }
 
 // ### Who am I ###
-#whoami {
+.whoami {
 
     .section__title,
     .subsection__title,
@@ -601,11 +685,7 @@ body {
         text-align: center;
     }
 
-    
-
     .whoami__info {
-
-
         // !!! Not sure if this should be done here
         font-size: 1.125rem;
 
@@ -623,9 +703,9 @@ body {
                 min-height: 1.8em;
                 width: 1.8em;
                 height: 1.8em;
-
                 margin: 1.1em 0;
                 margin-right: 4%;
+                fill: var(--ui-1);
             }
 
             p {
@@ -637,14 +717,16 @@ body {
 
     .whoami__image {
         text-align: center;
-
+   
         svg {
-            width: 90%;
-            max-width: 25em;
-            margin: 1em;
+        // Width on 1c layout
+        width: 70%;
+        max-width: 25em;
+        margin: 1em;
 
             @media only screen and (min-width: $media-big) {
                 width: 100%;
+                // ?? override normal max-width?
                 max-width: 100%;
                 margin: 0 0 1em 0;
             }
@@ -662,7 +744,7 @@ body {
 }
 
 // ### My Work ### 
-#my-work {
+.my-work {
 
     .section__title,
     .subsection__title,
@@ -672,7 +754,7 @@ body {
 
     .my-work__posts {
         // Simulate section
-        margin-top: $section-padding;
+        margin-top: $centered-padding;
     }
 
     .button--rounded {
@@ -681,12 +763,13 @@ body {
 }
 
 // ### Footer ###
-#footer {
+.footer {
     min-height: $footer-height;
 
     // Override padding
     .centered-content {
-        padding: $footer-padding $section-padding;
+        padding-top: $footer-padding;
+        padding-bottom: $footer-padding;
     }
 
     .footer-container {
@@ -696,24 +779,16 @@ body {
     svg {
         width: 1.5em;
         height: 1.5em;
-        margin: 0 0.5em;
-    }
-
-    circle {
-        fill: var(--bg-0);
+        margin: 0 0.1em;
     }
 
     .border {
         fill: var(--ui-1);
     }
-
-    path {
-        fill: var(--ui-1);
-    }
 }
 
 // ### Timeline
-#timeline {
+.timeline {
 
     .timeline__bar {
         background-color: var(--ui-1);
@@ -737,6 +812,7 @@ body {
         .timeline__description {
             margin-bottom: 1.5em;
         }
+
         .timeline__date,
         .timeline__title {
             margin-top: 1.5em;
@@ -767,7 +843,6 @@ body {
                 justify-content: center;
                 align-items: flex-end;
             }
-
         }
 
         // Show a bar
@@ -855,3 +930,4 @@ body {
         }
     }
 }
+
