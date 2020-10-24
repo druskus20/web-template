@@ -1,19 +1,11 @@
-// TOMORROW: 
-// TODO: SVGs de color inverso o algo
 // TODO: Titles / subtitles style (rubik?)
 // TODO: Make nav en condiciones, con hamburguesa en @media pequeñas
 // TODO: Do hero. Flex doesnt work right tho (zoom+scroll), absolute fucks up the zoom
 // TODO: Partials en Hugo
 
 
-// YET TO DOº
-// TODO: PROJECTS / BLOG + DEDICATED PAGES (career, hobbies)
-// TODO: Ordenar @media queries, sintaxis > = ..., gracias a eso simplificar algunas e invertir la mayoria
-
 @import "fonts.scss";
 @import "themes.scss";
-
-
 
 // * All of this have to be in rems else 
 //    I should have to use calc to mix ems and rems
@@ -284,12 +276,7 @@ body {
         width: 1em;
         height: 1em;
     }
-
-
-    
 }
-
-
 
 // ### Buttons ###
 %button {
@@ -297,11 +284,6 @@ body {
     text-align: center;
     text-decoration: none;
     background-color: transparent;
-
-
-    &:hover {
-        // opacity: 0.5;
-    }
 
     &:active {
         background-color: var(--bg-1);
@@ -331,8 +313,6 @@ body {
         background-color: var(--ui-1);
     }
 }
-
-
 
 // ### Boxes ###
 %box {
@@ -416,9 +396,6 @@ body {
     border-radius: 4px;
     background-color: var(--bg-1); // For all kind of cards
 
-   
-
-
     /*
     // I dont think this is needed
     img {
@@ -428,6 +405,7 @@ body {
         max-height: 120px;
     }
     */
+
     &:hover,
     &:focus,
     &:active {
@@ -452,15 +430,11 @@ body {
 .cardbg--blank {
     @extend %cardbg;
     background-image: url('../static/blank.svg');
-
-
 }
 
 .cardbg--terminal {
     @extend %cardbg;
     background-image: url('../static/terminal.svg');
-
-
 }
 
 .cardbg--programming {
@@ -489,7 +463,6 @@ body {
 
 // ### Sections ###
 .section {
-    //background-color: var(--bg-1);
     box-sizing: border-box;
 }
 
@@ -567,10 +540,9 @@ body {
     top: 0;
     min-height: $nav-height;
     transition: top 0.3s; // Transition on scroll
-    background-color: var(--bg-0); // !!!
+    background-color: var(--bg-0); 
     
     .centered-content {
-
         padding-top: $nav-padding;
         padding-bottom: $nav-padding;
   
@@ -679,7 +651,6 @@ body {
 
 // ### Who am I ###
 .whoami {
-
     .section__title,
     .subsection__title,
     .subsection__subtitle {
@@ -707,11 +678,6 @@ body {
                 margin: 1.1em 0;
                 margin-right: 4%;
                 fill: var(--ui-1);
-            }
-
-            p {
-                // Overrides rem (!!! ????)
-                //font-size: 1em;
             }
         }
     }
@@ -790,7 +756,6 @@ body {
 
 // ### Timeline
 .timeline {
-
     .timeline__bar {
         background-color: var(--ui-1);
     }
@@ -819,13 +784,10 @@ body {
             margin-top: 1.5em;
         }
 
-
         .timeline__date .box--border {
             background-color: var(--ui-1);
             color: var(--bg-1);
         }
-
-
     }
 
 
