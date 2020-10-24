@@ -227,7 +227,7 @@ html {
   font-size: 16px;
 }
 
-@media only screen and (max-width: 29.5rem) {
+@media only screen and (max-width: 35rem) {
   html {
     font-size: 14px;
   }
@@ -247,11 +247,11 @@ body {
 }
 
 ::-webkit-scrollbar {
-  background: var(--bg-0);
+  background: var(--bg-1);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--ui-0);
+  background: var(--ui-1);
 }
 
 .container--grid1col, .container--grid2col, .container--flexrow, .container--flexrow--center, .container--flexrow--spaced, .container--timeline-fr, .container--timeline-ev, .container--timeline-end, .container--grid2area--lb, .container--grid2area--rb {
@@ -277,7 +277,7 @@ body {
   gap: 2em;
 }
 
-@media only screen and (min-width: 59rem) {
+@media only screen and (min-width: 70rem) {
   .container--grid2col {
     -ms-grid-columns: (1fr)[2];
         grid-template-columns: repeat(2, 1fr);
@@ -322,7 +322,7 @@ body {
       grid-template-areas: "title date" "desc desc ";
 }
 
-@media only screen and (min-width: 59rem) {
+@media only screen and (min-width: 70rem) {
   .container--timeline-fr {
     -ms-grid-columns: 1fr 0.25em 1fr;
         grid-template-columns: 1fr 0.25em 1fr;
@@ -338,7 +338,7 @@ body {
       grid-template-areas: "title date";
 }
 
-@media only screen and (min-width: 59rem) {
+@media only screen and (min-width: 70rem) {
   .container--timeline-ev {
     -ms-grid-columns: 1fr 0.25em 1fr;
         grid-template-columns: 1fr 0.25em 1fr;
@@ -346,7 +346,7 @@ body {
   }
 }
 
-@media only screen and (min-width: 59rem) {
+@media only screen and (min-width: 70rem) {
   .container--timeline-end {
     display: -ms-grid;
     display: grid;
@@ -370,14 +370,14 @@ body {
       grid-template-areas: "box1" "box2";
 }
 
-@media only screen and (min-width: 59rem) {
+@media only screen and (min-width: 70rem) {
   .container--grid2area--lb, .container--grid2area--rb {
     -webkit-column-gap: 2em;
             column-gap: 2em;
   }
 }
 
-@media only screen and (min-width: 59rem) {
+@media only screen and (min-width: 70rem) {
   .container--grid2area--lb {
     -ms-grid-columns: 1.5fr 1fr;
         grid-template-columns: 1.5fr 1fr;
@@ -385,7 +385,7 @@ body {
   }
 }
 
-@media only screen and (min-width: 59rem) {
+@media only screen and (min-width: 70rem) {
   .container--grid2area--rb {
     -ms-grid-columns: 1fr 1.5fr;
         grid-template-columns: 1fr 1.5fr;
@@ -609,6 +609,11 @@ body {
           box-shadow: 0 6px 15px var(--shadow-strong), 0 4px 8px var(--shadow-strong);
 }
 
+.article-spacer {
+  width: 80%;
+  margin: 2rem auto;
+}
+
 .section__title {
   color: var(--ui-0);
 }
@@ -640,7 +645,7 @@ body {
 .centered-content {
   padding-left: 3rem;
   padding-right: 3rem;
-  max-width: 56rem;
+  max-width: 67rem;
 }
 
 @media only screen and (max-width: 400px) {
@@ -811,7 +816,7 @@ body {
   margin: 1em;
 }
 
-@media only screen and (min-width: 59rem) {
+@media only screen and (min-width: 70rem) {
   .whoami .whoami__image svg {
     width: 100%;
     max-width: 100%;
@@ -908,7 +913,7 @@ body {
   height: 5em;
 }
 
-@media only screen and (min-width: 59rem) {
+@media only screen and (min-width: 70rem) {
   .timeline .container--timeline-end .timeline__image {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -926,7 +931,7 @@ body {
   }
 }
 
-@media only screen and (min-width: 59rem) {
+@media only screen and (min-width: 70rem) {
   .timeline .container--timeline-end .timeline__bar {
     min-height: 3em;
   }
@@ -971,7 +976,7 @@ body {
   grid-area: image;
 }
 
-@media only screen and (min-width: 59rem) {
+@media only screen and (min-width: 70rem) {
   .timeline .timeline-right .timeline__title,
   .timeline .timeline-right .timeline__description,
   .timeline .timeline-left .timeline__date {

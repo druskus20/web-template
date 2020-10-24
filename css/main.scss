@@ -6,7 +6,7 @@
 // TODO: Partials en Hugo
 
 
-// YET TO DO
+// YET TO DOº
 // TODO: PROJECTS / BLOG + DEDICATED PAGES (career, hobbies)
 // TODO: Ordenar @media queries, sintaxis > = ..., gracias a eso simplificar algunas e invertir la mayoria
 
@@ -24,7 +24,7 @@ $footer-padding: 1rem;
 $footer-height: 7.5rem+$footer-padding*2;
 
 $centered-padding: 3rem;
-$total-width: 50rem+$centered-padding*2;
+$total-width: 50rem+$centered-padding*2 + 11rem; // 11 rem for article-centered
 
 // * Fix weird text resizing issues by adding 2 extra rem
 //      doesnt really make sense but you can see it works 
@@ -124,11 +124,11 @@ body {
 
 // ### Scrollbar ### 
 ::-webkit-scrollbar {
-    background: var(--bg-0);
+    background: var(--bg-1);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--ui-0);
+    background: var(--ui-1);
 }
 
 // ### General Containers ### 
@@ -443,7 +443,6 @@ body {
     }
 }
 
-
 %cardbg {
     background-repeat: no-repeat;
     background-position: right;
@@ -519,6 +518,11 @@ body {
     background-color: var(--bg-1);
     border-radius: 5px;
     margin: 1em auto;
+}
+
+.article-spacer {
+    width: 80%;
+    margin: 2rem auto;
 }
 
 .section__title {
@@ -619,9 +623,6 @@ body {
             display: none;
     }
 }
-
-
-
 
 .accent {
     color: var(--accent);
